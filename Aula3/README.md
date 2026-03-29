@@ -16,7 +16,10 @@ Baseado na especificação do início do documento para o **IFgram**, modele os 
  
 ```json
 {
-  // Insira aqui o schema JSON do recurso modelado
+  "id": 1,
+  "titulo": "Minha primeira postagem teste",
+  "conteudo": "Conteúdo da postagem: teste.",
+  "dataCriacao": "2025-03-28T10:00:00"
 }
 ```
  
