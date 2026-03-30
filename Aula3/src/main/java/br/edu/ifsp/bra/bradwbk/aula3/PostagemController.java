@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/postagens")
+@RequestMapping("/posts")
 public class PostagemController {
 
     private List<Postagem> postagens = new ArrayList<>();
