@@ -2,33 +2,32 @@ package br.edu.ifsp.bra.aula3.service;
 
 import java.util.ArrayList;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 import br.edu.ifsp.bra.aula3.model.User;
 
-@Configuration
+@Service  //Bean
 public class UserServiceImpl implements UserService {
 
-    ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
 
-    @Bean    
     @Override
     public void add(User newUser) {
-        // TODO Auto-generated method stub
-
+        users.add(newUser);
     }
-    @Bean    
+
     @Override
     public User find(String login) {
-        // TODO Auto-generated method stub
+        for (User u : users) {
+            if (u.getLogin().equals(login)) {
+                return u;
+            }
+        }
         return null;
     }
-    @Bean    
+
     @Override
     public boolean remove(String login) {
-        // TODO Auto-generated method stub
-        return false;
+        return users.removeIf(u -> u.getLogin().equals(login));
     }
-
 }
