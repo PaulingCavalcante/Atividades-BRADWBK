@@ -53,12 +53,19 @@ type Query {
   hero(episode: Episode): Character #Será o mesmo nome no método Java
   droid(id: ID!): Droid # Será o mesmo nome no método Java
   search(text: String!): [SearchResult!]! # Será o mesmo nome no método Java
+  humans: [Human!]! # Retorna todos os humanos
+  starships: [Starship!]! # Retorna todas as naves
+  character(id: ID!): Character # Busca qualquer personagem pelo ID
 }
 
 # ::::::::::::::: Mutations :::::::::::::::::::::
 
 type Mutation {
     createReview(episode: Episode!, review: ReviewInput!): Review # Será o mesmo nome no método Java
+    createHuman(id: ID!, nome: String!, height: Float): Human # Cria um novo humano
+    createDroid(id: ID!, nome: String!, primaryFunction: String): Droid # Cria um novo droid
+    createStarship(id: ID!, nome: String!, length: Float): Starship # Cria uma nova nave
+    addFriend(characterId: ID!, friendId: ID!): Character # Adiciona um amigo a um personagem
 }
 
 # ::::::::::::::: Union (Consulta combinada) :::::::::::::::::::::
