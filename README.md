@@ -4,12 +4,12 @@ Repositório com os exercícios práticos da disciplina **BRADWBK – Desenvolvi
 
 ## Estrutura
 
-| Pasta  | Tema                                    | Stack principal                          |
-| ------ | --------------------------------------- | ---------------------------------------- |
-| Aula3  | API REST – CRUD de usuários            | Spring Web MVC                           |
-| Aula4  | API REST – IFgram (postagens)          | Spring Web MVC                           |
-| Aula5  | API GraphQL – Star Wars                 | Spring for GraphQL                       |
-| Aula7  | Persistência em banco de dados          | Spring Boot (base inicial)               |
+| Pasta  | Tema                                       | Stack principal                          |
+| ------ | ------------------------------------------ | ---------------------------------------- |
+| Aula3  | API REST – CRUD de usuários                | Spring Web MVC                           |
+| Aula4  | API REST – IFgram (postagens)              | Spring Web MVC                           |
+| Aula5  | API GraphQL – Star Wars                    | Spring for GraphQL                       |
+| Aula7  | Persistência – Gestão de Biblioteca        | Spring Data JPA + Hibernate + MySQL      |
 
 ---
 
@@ -80,11 +80,35 @@ Mutations:
 
 ---
 
-## Aula 7 – Persistência com Spring (em andamento)
+## Aula 7 – Gestão de Biblioteca (Spring Data JPA)
 
-Projeto base do Spring Boot para a atividade de **persistência em banco de dados**. O PDF da atividade está disponível em `Aula7/Aula 7 (BRADWBK) - Persistência em banco de dados com Spring.pdf`.
+API REST com persistência em banco de dados (**MySQL**) usando **Spring Data JPA / Hibernate**, conforme o exercício do PDF da aula.
 
-Estado atual: projeto inicializado com `spring-boot-starter-webmvc`; implementação dos repositórios e entidades pendente.
+- **Entidades JPA** (`@Entity`, `@Id`, `@GeneratedValue(IDENTITY)`):
+  - `Livro` (id, titulo, autor)
+  - `Categoria` (id, nome)
+- **Repositórios** estendendo `CrudRepository<T, Long>`:
+  - `LivroRepository`
+  - `CategoriaRepository`
+- **Controllers REST:**
+  - `LivroController` em `/livros`
+  - `CategoriaController` em `/categorias`
+
+Endpoints:
+
+| Verbo  | Path           | Descrição                                  |
+| ------ | -------------- | ------------------------------------------ |
+| GET    | `/livros`      | Lista todos os livros                      |
+| POST   | `/livros`      | Cria um livro (JSON com `titulo` e `autor`) |
+| GET    | `/categorias`  | Lista todas as categorias                  |
+| POST   | `/categorias`  | Cria uma categoria (JSON com `nome`)       |
+
+Configuração do banco (`application.properties`):
+
+- Banco `biblioteca_db` no MySQL (`createDatabaseIfNotExist=true`)
+- `spring.jpa.hibernate.ddl-auto=update` – tabelas geradas automaticamente
+- `spring.jpa.show-sql=true` – mostra as SQLs no console
+- Driver: `mysql-connector-j` (runtime)
 
 ---
 
@@ -96,4 +120,8 @@ Cada aula é um projeto Maven independente. Dentro da pasta da aula:
 ./mvnw spring-boot:run
 ```
 
-Requisitos: Java 17+ (Aula 7 usa Java 21) e Maven Wrapper já incluso.
+Requisitos:
+
+- Java 17+ (Aula 7 usa Java 21)
+- Maven Wrapper já incluso (`mvnw`)
+- Para a Aula 7: MySQL rodando em `localhost:3306` com usuário `root` (senha vazia, conforme `application.properties`)
